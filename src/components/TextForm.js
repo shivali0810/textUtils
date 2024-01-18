@@ -13,6 +13,12 @@ export default function TextForm(props) {
     setText(newtext);
     }
 
+    const handleSpaces=()=>{
+      console.log("LExtra spaces removed")
+      let newtext= text.split(/[ ]+/)
+      setText(newtext.join(" "));
+      }
+
     const handleClearClick=()=>{
       console.log("Clear clicked")
       let newtext= '';
@@ -22,6 +28,13 @@ export default function TextForm(props) {
   const handleOnChange=()=>{
     console.log("on change") 
     setText(event.target.value)
+  }
+
+  const handleCopy=()=>{
+    console.log("text copied")
+    var text=document.getElementById("myBox")
+    text.select();
+    navigator.clipboard.writeText(text.value)
   }
 
   const[text, setText]=useState("")
@@ -35,6 +48,8 @@ export default function TextForm(props) {
         <button className="btn btn-success mx-2" onClick={handleUpClick}>Convert to Upper Case</button>
         <button className="btn btn-success mx-2" onClick={handleLoClick}>Convert to Lower Case</button>
         <button className="btn btn-success mx-2" onClick={handleClearClick}>Clear text</button>
+        <button className="btn btn-success mx-2" onClick={handleCopy}>Copy text</button>
+        <button className="btn btn-success mx-2" onClick={handleSpaces}>Remove extra spaces</button>
     </div>
 
     <div className="container">
@@ -44,7 +59,7 @@ export default function TextForm(props) {
     </div>
 
     <h2>Preview</h2>
-    <p>{text}</p>
+    <p>{text.length>0 ? text : "enter above to preview here"}</p>
     </>
   )
 }
