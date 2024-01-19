@@ -27,7 +27,7 @@ if(mode==='light'){
   document.body.style.color='white'
   showAlert("dark mode enabled", "success")
 }
-else{
+else if(mode==='dark'){
   setmode('light')
   document.body.style.background='white'
   document.body.style.color='black'
